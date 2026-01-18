@@ -135,6 +135,7 @@
             height: auto;
             object-fit: cover;
             z-index: 0;
+            filter: brightness(1.5);
         }
 
         .hero-overlay {
@@ -143,7 +144,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 10, 15, 0.6);
+            background: rgba(10, 10, 15, 0.3);
             z-index: 1;
         }
 
@@ -796,6 +797,64 @@
             }
         }
 
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .lightbox-close:hover {
+            color: var(--accent);
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.1rem;
+            text-align: center;
+            max-width: 80%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 8px;
+        }
+
+        .lightbox-caption:empty {
+            display: none;
+        }
+
         @media (max-width: 480px) {
             .hero-buttons {
                 flex-direction: column;
@@ -843,7 +902,6 @@
         </video>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <div class="hero-badge">Commercial Metal Fabrication in Georgia</div>
             <h1>Custom Metal Work Built to <span>Last</span></h1>
             <p>From striking signage to architectural installations, we craft precision metalwork for restaurants, retailers, and businesses across the Southeast.</p>
             <div class="hero-buttons">
@@ -856,7 +914,7 @@
     <script>
         // Video rotation with fade transition
         const heroVideo = document.getElementById('heroVideo');
-        const videos = ['Movies/0117 (1).MP4', 'Movies/IMG_3410 (2) (1).MP4'];
+        const videos = ['Movies/0117 (1).MP4', 'Movies/IMG_3403 (1).MP4', 'Movies/0904.mp4', 'Movies/15_pan.mp4'];
         let currentVideo = 0;
 
         heroVideo.style.transition = 'opacity 1s ease-in-out';
@@ -921,43 +979,50 @@
             <p class="section-desc">A selection of our commercial and custom work for clients across Georgia.</p>
         </div>
         <div class="portfolio-grid">
-            <div class="portfolio-item">
+            <div class="portfolio-item" onclick="openLightbox('images/15.JPEG', 'Custom designed hand crafted gates and railings.')">
                 <img src="images/15.JPEG" alt="Custom Metal Work">
                 <div class="portfolio-overlay">
                     <h3>Custom Metal Work</h3>
                     <p>Professional fabrication</p>
                 </div>
             </div>
-            <div class="portfolio-item">
+            <div class="portfolio-item" onclick="openLightbox('images/17.JPEG', 'Unique and commercial grade architectural lighting installations. Help facilitate creating great moments and memories for customers.')">
                 <img src="images/17.JPEG" alt="Metal Art">
                 <div class="portfolio-overlay">
                     <h3>Custom Metal Work</h3>
                     <p>Professional fabrication</p>
                 </div>
             </div>
-            <div class="portfolio-item">
-                <img src="images/18.JPEG" alt="Metal Art">
+            <div class="portfolio-item" onclick="openLightbox('images/22.JPEG', 'Van Gogh inspired LED fountain.')">
+                <img src="images/22.JPEG" alt="Metal Art">
                 <div class="portfolio-overlay">
                     <h3>Metal Art</h3>
                     <p>Custom design</p>
                 </div>
             </div>
-            <div class="portfolio-item">
+            <div class="portfolio-item" onclick="openLightbox('images/21.JPEG')">
                 <img src="images/21.JPEG" alt="Commercial Signage">
                 <div class="portfolio-overlay">
                     <h3>Commercial Signage</h3>
                     <p>Business signage</p>
                 </div>
             </div>
-            <div class="portfolio-item">
+            <div class="portfolio-item" onclick="openLightbox('images/16.JPEG')">
                 <img src="images/16.JPEG" alt="Metal Installation">
                 <div class="portfolio-overlay">
                     <h3>Metal Installation</h3>
                     <p>Custom installation</p>
                 </div>
             </div>
-            <div class="portfolio-item">
+            <!-- <div class="portfolio-item">
                 <img src="images/19.JPEG" alt="Custom Fabrication">
+                <div class="portfolio-overlay">
+                    <h3>Custom Fabrication</h3>
+                    <p>Precision metalwork</p>
+                </div>
+            </div> -->
+            <div class="portfolio-item" onclick="openVideoLightbox('Movies/IMG_3403 (1).MP4', 'Hand fabricated LED table incredible to see in person.')">
+                <img src="images/0117(3).png" alt="Custom Fabrication">
                 <div class="portfolio-overlay">
                     <h3>Custom Fabrication</h3>
                     <p>Precision metalwork</p>
@@ -1044,7 +1109,7 @@
                         <div class="contact-item-icon">&#9993;</div>
                         <div>
                             <h4>Email</h4>
-                            <p>info@hendershotmetalworks.com</p>
+                            <p>reidhen@gmail.com</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -1098,6 +1163,14 @@
         </div>
     </section>
 
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Full size image">
+        <video id="lightbox-video" controls style="display:none; max-width:90%; max-height:90%; border-radius:8px;"></video>
+        <p id="lightbox-caption" class="lightbox-caption"></p>
+    </div>
+
     <footer>
         <div class="footer-content">
             <div class="footer-logo">Hendershot Metal Works</div>
@@ -1130,6 +1203,39 @@
             e.preventDefault();
             alert('Thank you for your inquiry! We will get back to you within 48 hours.');
             this.reset();
+        });
+
+        // Lightbox functions
+        function openLightbox(imageSrc, caption) {
+            document.getElementById('lightbox-img').src = imageSrc;
+            document.getElementById('lightbox-img').style.display = 'block';
+            document.getElementById('lightbox-video').style.display = 'none';
+            document.getElementById('lightbox-video').pause();
+            document.getElementById('lightbox-caption').textContent = caption || '';
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openVideoLightbox(videoSrc, caption) {
+            document.getElementById('lightbox-img').style.display = 'none';
+            document.getElementById('lightbox-video').src = videoSrc;
+            document.getElementById('lightbox-video').style.display = 'block';
+            document.getElementById('lightbox-caption').textContent = caption || '';
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.getElementById('lightbox-video').pause();
+            document.body.style.overflow = '';
+        }
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
         });
     </script>
 </body>
