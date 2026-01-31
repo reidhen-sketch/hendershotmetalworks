@@ -915,7 +915,7 @@
     <script>
         // Video rotation with fade transition
         const heroVideo = document.getElementById('heroVideo');
-        const videos = ['Movies/0117_compressed.mp4', 'Movies/IMG_3403_compressed.mp4', 'Movies/0904_compressed.mp4', 'Movies/15_pan.mp4', 'Movies/IMG_7620.MP4'];
+        const videos = ['Movies/0117_compressed.mp4', 'Movies/IMG_3403_compressed.mp4', 'Movies/0904_compressed.mp4', 'Movies/15_pan.mp4', 'Movies/IMG_7620_compressed.mp4'];
         let currentVideo = 0;
 
         heroVideo.style.transition = 'opacity 1s ease-in-out';
@@ -932,46 +932,6 @@
         });
     </script>
 
-
-    <section id="services" class="services-section">
-        <div class="section-header">
-            <div class="section-label">Services</div>
-            <h2 class="section-title">What We Build</h2>
-            <p class="section-desc">Full-service metal fabrication from concept to installation. Every piece is engineered to your exact specifications.</p>
-        </div>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">&#9670;</div>
-                <h3>Custom Metal Art</h3>
-                <p>Unique sculptures and wall pieces designed to your vision. From modern geometric forms to detailed custom designs.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">&#9728;</div>
-                <h3>Illuminated Signage</h3>
-                <p>LED and neon-style backlit signs that make your business stand out. Built for durability and visual impact.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">&#9041;</div>
-                <h3>Commercial Signage</h3>
-                <p>Professional business signs built to last. Restaurant signs, storefront displays, and branded installations.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">&#9878;</div>
-                <h3>Architectural Metal</h3>
-                <p>Custom fixtures, railings, decorative panels, and structural elements for commercial and residential projects.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">&#9055;</div>
-                <h3>Residential Projects</h3>
-                <p>Address plates, garden art, furniture accents, and personalized signs to enhance your home.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">&#9881;</div>
-                <h3>Custom Fabrication</h3>
-                <p>If you can dream it, we can build it. MIG/TIG welding, plasma cutting, and precision bending.</p>
-            </div>
-        </div>
-    </section>
 
     <section id="portfolio">
         <div class="section-header">
@@ -1027,6 +987,46 @@
                     <h3>Custom Fabrication</h3>
                     <p>Precision metalwork</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services-section">
+        <div class="section-header">
+            <div class="section-label">Services</div>
+            <h2 class="section-title">What We Build</h2>
+            <p class="section-desc">Full-service metal fabrication from concept to installation. Every piece is engineered to your exact specifications.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">&#9670;</div>
+                <h3>Custom Metal Art</h3>
+                <p>Unique sculptures and wall pieces designed to your vision. From modern geometric forms to detailed custom designs.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">&#9728;</div>
+                <h3>Illuminated Signage</h3>
+                <p>LED and neon-style backlit signs that make your business stand out. Built for durability and visual impact.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">&#9041;</div>
+                <h3>Commercial Signage</h3>
+                <p>Professional business signs built to last. Restaurant signs, storefront displays, and branded installations.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">&#9878;</div>
+                <h3>Architectural Metal</h3>
+                <p>Custom fixtures, railings, decorative panels, and structural elements for commercial and residential projects.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">&#9055;</div>
+                <h3>Residential Projects</h3>
+                <p>Address plates, garden art, furniture accents, and personalized signs to enhance your home.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">&#9881;</div>
+                <h3>Custom Fabrication</h3>
+                <p>If you can dream it, we can build it. MIG/TIG welding, plasma cutting, and precision bending.</p>
             </div>
         </div>
     </section>
@@ -1121,7 +1121,9 @@
                     </div>
                 </div>
             </div>
-            <form class="contact-form" action="#" method="POST">
+            <form class="contact-form" action="https://formsubmit.co/reidhen@gmail.com" method="POST">
+                <input type="hidden" name="_subject" value="New Quote Request - Hendershot Metal Works">
+                <input type="hidden" name="_next" value="https://www.hendershotmetalworks.com/">
                 <div class="form-row">
                     <div class="form-group">
                         <label>Name</label>
@@ -1203,11 +1205,6 @@
             });
         });
 
-        document.querySelector('.contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your inquiry! We will get back to you within 48 hours.');
-            this.reset();
-        });
 
         // Lightbox functions
         function openLightbox(imageSrc, caption) {
