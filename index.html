@@ -1121,9 +1121,7 @@
                     </div>
                 </div>
             </div>
-            <form class="contact-form" action="https://formsubmit.co/reidhen@gmail.com" method="POST">
-                <input type="hidden" name="_subject" value="New Quote Request - Hendershot Metal Works">
-                <input type="hidden" name="_next" value="https://www.hendershotmetalworks.com/">
+            <form class="contact-form" action="#" method="POST">
                 <div class="form-row">
                     <div class="form-group">
                         <label>Name</label>
@@ -1205,6 +1203,11 @@
             });
         });
 
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your inquiry! We will get back to you within 48 hours.');
+            this.reset();
+        });
 
         // Lightbox functions
         function openLightbox(imageSrc, caption) {
