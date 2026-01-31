@@ -354,8 +354,9 @@
         /* Portfolio */
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            justify-items: center;
         }
 
         .portfolio-item {
@@ -370,7 +371,7 @@
         .portfolio-item img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             transition: transform 0.5s;
         }
 
@@ -914,7 +915,7 @@
     <script>
         // Video rotation with fade transition
         const heroVideo = document.getElementById('heroVideo');
-        const videos = ['Movies/0117_compressed.mp4', 'Movies/IMG_3403_compressed.mp4', 'Movies/0904_compressed.mp4', 'Movies/15_pan.mp4'];
+        const videos = ['Movies/0117_compressed.mp4', 'Movies/IMG_3403_compressed.mp4', 'Movies/0904_compressed.mp4', 'Movies/15_pan.mp4', 'Movies/IMG_7620.MP4'];
         let currentVideo = 0;
 
         heroVideo.style.transition = 'opacity 1s ease-in-out';
@@ -979,35 +980,34 @@
             <p class="section-desc">A selection of our commercial and custom work for clients across Georgia.</p>
         </div>
         <div class="portfolio-grid">
-            <div class="portfolio-item" onclick="openLightbox('images/15.JPEG', 'Custom designed hand crafted gates and railings.')">
+            <div class="portfolio-item" style="transform: scale(1.1);" onclick="openLightbox('images/15.JPEG', 'Custom designed hand crafted gates and railings.')">
                 <img src="images/15.JPEG" alt="Custom Metal Work">
                 <div class="portfolio-overlay">
                     <h3>Custom Metal Work</h3>
                     <p>Professional fabrication</p>
                 </div>
             </div>
-            <div class="portfolio-item" onclick="openLightbox('images/17.JPEG', 'Unique and commercial grade architectural lighting installations. Help facilitate creating great moments and memories for customers.')">
+            <div class="portfolio-item" style="transform: scale(1.1);" onclick="openLightbox('images/17.JPEG', 'Unique and commercial grade architectural lighting installations. Help facilitate creating great moments and memories for customers.')">
                 <img src="images/17.JPEG" alt="Metal Art">
                 <div class="portfolio-overlay">
                     <h3>Custom Metal Work</h3>
                     <p>Professional fabrication</p>
                 </div>
             </div>
-            <div class="portfolio-item" onclick="openLightbox('images/22.JPEG', 'Van Gogh inspired LED fountain.')">
-                <img src="images/22.JPEG" alt="Metal Art">
+            <div class="portfolio-item" style="transform: scale(1.1);" onclick="openVideoLightbox('Movies/0131_compressed.mp4', 'Funky custom made led palm tree')">
+                <img src="images/30.JPG" alt="Metal Art">
                 <div class="portfolio-overlay">
                     <h3>Metal Art</h3>
                     <p>Custom design</p>
                 </div>
             </div>
-            <div class="portfolio-item" onclick="openLightbox('images/10.JPG')">
-                <img src="images/10.JPG" alt="Commercial Signage">
+            <div class="portfolio-item" style="transform: scale(1.1);" onclick="openVideoLightbox('Movies/0131(1)_compressed.mp4', 'Commercial artwork')">
+                <img src="images/25.jpg" alt="Commercial Signage">
                 <div class="portfolio-overlay">
-                    <h3>Commercial Signage</h3>
-                    <p>Business signage</p>
+                    <p>Commercial artwork</p>
                 </div>
             </div>
-            <div class="portfolio-item" onclick="openLightbox('images/16.JPEG')">
+            <div class="portfolio-item" style="transform: scale(1.1);" onclick="openLightbox('images/16.JPEG')">
                 <img src="images/16.JPEG" alt="Metal Installation">
                 <div class="portfolio-overlay">
                     <h3>Metal Installation</h3>
@@ -1015,14 +1015,14 @@
                 </div>
             </div>
             <!-- <div class="portfolio-item">
-                <img src="images/19.JPEG" alt="Custom Fabrication">
+                <img src="images/18.JPEG" alt="Custom Fabrication">
                 <div class="portfolio-overlay">
                     <h3>Custom Fabrication</h3>
                     <p>Precision metalwork</p>
                 </div>
             </div> -->
-            <div class="portfolio-item" onclick="openLightbox('images/18.JPEG')">
-                <img src="images/0117(3).png" alt="Custom Fabrication">
+            <div class="portfolio-item" style="transform: scale(1.1);" onclick="openVideoLightbox('Movies/0904_compressed.mp4')">
+                <img src="images/18.JPEG" alt="Custom Fabrication">
                 <div class="portfolio-overlay">
                     <h3>Custom Fabrication</h3>
                     <p>Precision metalwork</p>
@@ -1050,13 +1050,6 @@
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                         Custom Solutions
                     </div>
-                </div>
-            </div>
-            <div class="about-image">
-                <div class="about-image-grid">
-                    <img src="images/8.JPG" alt="Studio work">
-                    <img src="images/9.JPG" alt="Metal sculpture">
-                    <img src="images/10.JPG" alt="Custom signage">
                 </div>
             </div>
         </div>
@@ -1179,7 +1172,7 @@
     </div>
 
     <div style="text-align: center; padding: 3rem 2rem;">
-        <img src="images/reid-5.jpg" alt="Reid Hendershot" style="max-width: 300px; width: 100%; border-radius: 12px; filter: brightness(0.9);">
+        <img src="images/reid-1.jpg" alt="Reid Hendershot" style="max-width: 300px; width: 100%; border-radius: 12px; filter: brightness(0.9);">
     </div>
 
     <footer>
