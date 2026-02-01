@@ -939,6 +939,11 @@
                 const playDuration = heroVideo.duration * 0.8 * 1000;
                 videoTimeout = setTimeout(nextVideo, playDuration);
             }
+            if (videos[currentVideo].includes('15_pan')) {
+                heroVideo.style.filter = 'brightness(1.15)';
+            } else {
+                heroVideo.style.filter = 'brightness(1.5)';
+            }
         });
 
         heroVideo.addEventListener('ended', nextVideo);
