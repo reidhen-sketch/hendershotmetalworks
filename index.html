@@ -913,7 +913,7 @@
     </section>
 
     <script>
-        // Video rotation with fade transition
+        // Video rotation with fade transition - loops continuously
         const heroVideo = document.getElementById('heroVideo');
         const videos = ['Movies/0117_compressed.mp4', 'Movies/15_pan.mp4', 'Movies/0131(1)_compressed.mp4', 'Movies/0904_compressed.mp4', 'Movies/IMG_7620_compressed.mp4'];
         let currentVideo = 0;
@@ -933,12 +933,15 @@
             }, 1000);
         }
 
-        heroVideo.addEventListener('loadedmetadata', function() {
+        function scheduleNextVideo() {
             clearTimeout(videoTimeout);
-            if (videos[currentVideo].includes('0117')) {
-                const playDuration = heroVideo.duration * 0.8 * 1000;
-                videoTimeout = setTimeout(nextVideo, playDuration);
-            }
+            // Use 95% of video duration to ensure smooth transition before end
+            const playDuration = heroVideo.duration * 0.95 * 1000;
+            videoTimeout = setTimeout(nextVideo, playDuration);
+        }
+
+        heroVideo.addEventListener('loadedmetadata', function() {
+            scheduleNextVideo();
             if (videos[currentVideo].includes('15_pan')) {
                 heroVideo.style.filter = 'brightness(1.15)';
             } else {
@@ -946,6 +949,7 @@
             }
         });
 
+        // Backup: if video ends before timeout, still advance
         heroVideo.addEventListener('ended', nextVideo);
     </script>
 
