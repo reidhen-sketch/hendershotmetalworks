@@ -917,10 +917,12 @@
         const heroVideo = document.getElementById('heroVideo');
         const videos = ['Movies/0117_compressed.mp4', 'Movies/IMG_3403_compressed.mp4', 'Movies/0904_compressed.mp4', 'Movies/15_pan.mp4', 'Movies/IMG_7620_compressed.mp4'];
         let currentVideo = 0;
+        let videoTimeout;
 
         heroVideo.style.transition = 'opacity 1s ease-in-out';
 
-        heroVideo.addEventListener('ended', function() {
+        function nextVideo() {
+            clearTimeout(videoTimeout);
             heroVideo.style.opacity = '0';
 
             setTimeout(function() {
@@ -929,7 +931,17 @@
                 heroVideo.play();
                 heroVideo.style.opacity = '1';
             }, 1000);
+        }
+
+        heroVideo.addEventListener('loadedmetadata', function() {
+            clearTimeout(videoTimeout);
+            if (videos[currentVideo].includes('0117')) {
+                const playDuration = heroVideo.duration * 0.8 * 1000;
+                videoTimeout = setTimeout(nextVideo, playDuration);
+            }
         });
+
+        heroVideo.addEventListener('ended', nextVideo);
     </script>
 
 
