@@ -918,18 +918,33 @@
         const videos = ['Movies/0117_compressed.mp4', 'Movies/15_pan.mp4', 'Movies/0131_header_new.mp4', 'Movies/0904_compressed.mp4', 'Movies/IMG_7620_compressed.mp4'];
         let currentVideo = 0;
         let videoTimeout;
+        let isTransitioning = false;
 
         heroVideo.style.transition = 'opacity 1s ease-in-out';
 
         function nextVideo() {
+            // Prevent double triggering
+            if (isTransitioning) return;
+            isTransitioning = true;
+
             clearTimeout(videoTimeout);
             heroVideo.style.opacity = '0';
 
             setTimeout(function() {
                 currentVideo = (currentVideo + 1) % videos.length;
                 heroVideo.src = videos[currentVideo];
-                heroVideo.play();
-                heroVideo.style.opacity = '1';
+
+                // Handle play promise
+                heroVideo.play().then(function() {
+                    heroVideo.style.opacity = '1';
+                    isTransitioning = false;
+                }).catch(function(err) {
+                    console.warn('Video autoplay failed:', err);
+                    heroVideo.style.opacity = '1';
+                    isTransitioning = false;
+                    // Still schedule next video even if play fails
+                    scheduleNextVideo();
+                });
             }, 1000);
         }
 
@@ -950,7 +965,11 @@
         });
 
         // Backup: if video ends before timeout, still advance
-        heroVideo.addEventListener('ended', nextVideo);
+        heroVideo.addEventListener('ended', function() {
+            if (!isTransitioning) {
+                nextVideo();
+            }
+        });
     </script>
 
 
