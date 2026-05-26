@@ -914,6 +914,26 @@
             display: none;
         }
 
+        .lightbox-next {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            font-size: 2rem;
+            padding: 0.4rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: none;
+        }
+
+        .lightbox-next:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
         @media (max-width: 480px) {
             .hero-buttons {
                 flex-direction: column;
@@ -1051,7 +1071,7 @@
         <div class="gallery-grid">
             <div class="gallery-item" onclick="openLightbox('images/1.JPG')"><img src="images/1.JPG" alt="Metal Work"><div class="gallery-overlay"></div></div>
             <div class="gallery-item" onclick="openLightbox('images/2.JPG')"><img src="images/2.JPG" alt="Metal Work"><div class="gallery-overlay"></div></div>
-            <div class="gallery-item" onclick="openLightbox('images/27.png')"><img src="images/27.png" alt="Metal Work"><div class="gallery-overlay"></div></div>
+            <div class="gallery-item" onclick="openLightbox('images/27.png')"><img src="images/27.png" alt="Metal Work" style="object-fit: fill;"><div class="gallery-overlay"></div></div>
             <div class="gallery-item" onclick="openLightbox('images/5.jpg')"><img src="images/5.jpg" alt="Metal Work"><div class="gallery-overlay"></div></div>
             <div class="gallery-item" onclick="openLightbox('images/8.JPG')"><img src="images/8.JPG" alt="Metal Work"><div class="gallery-overlay"></div></div>
             <div class="gallery-item" onclick="openLightbox('images/19.JPEG')"><img src="images/19.JPEG" alt="Metal Work"><div class="gallery-overlay"></div></div>
@@ -1064,6 +1084,7 @@
             <div class="gallery-item" onclick="openLightbox('images/37.jpeg')"><img src="images/37.jpeg" alt="Metal Work"><div class="gallery-overlay"></div></div>
             <div class="gallery-item" onclick="openLightbox('images/40.jpeg')"><img src="images/40.jpeg" alt="Metal Work"><div class="gallery-overlay"></div></div>
             <div class="gallery-item" onclick="openLightbox('images/16.JPEG')"><img src="images/16.JPEG" alt="Metal Work"><div class="gallery-overlay"></div></div>
+            <div class="gallery-item" onclick="openLightbox('images/2d palm.JPEG')"><img src="images/2d palm.JPEG" alt="2D Palm"><div class="gallery-overlay"></div></div>
         </div>
     </section>
 
@@ -1074,7 +1095,7 @@
             <p class="section-desc">A selection of our commercial and custom work for clients across Georgia.</p>
         </div>
         <div class="portfolio-grid">
-            <div class="portfolio-item" style="transform: scale(1.1);" onclick="openVideoLightbox('Movies/41_pan.mp4', '')">
+            <div class="portfolio-item" style="transform: scale(1.1);" onclick="openLightbox('images/36.jpeg', '', 'images/40.jpeg')">
                 <img src="images/38.jpeg" alt="Custom Metal Work" style="transform: scale(1.1);">
                 <div class="portfolio-overlay">
                     <h3>Custom Metal Work</h3>
@@ -1305,6 +1326,7 @@
         <img id="lightbox-img" src="" alt="Full size image">
         <video id="lightbox-video" controls muted style="display:none; max-width:90%; max-height:90%; border-radius:8px;"></video>
         <p id="lightbox-caption" class="lightbox-caption"></p>
+        <button id="lightbox-next" class="lightbox-next" onclick="event.stopPropagation(); goNextLightbox()">&#8250;</button>
     </div>
 
     <div style="text-align: center; padding: 3rem 2rem;">
@@ -1340,7 +1362,9 @@
         });
 
         // Lightbox functions
-        function openLightbox(imageSrc, caption) {
+        let lightboxNextSrc = null;
+
+        function openLightbox(imageSrc, caption, nextSrc) {
             document.getElementById('lightbox-img').src = imageSrc;
             document.getElementById('lightbox-img').style.display = 'block';
             document.getElementById('lightbox-video').style.display = 'none';
@@ -1348,6 +1372,12 @@
             document.getElementById('lightbox-caption').textContent = caption || '';
             document.getElementById('lightbox').classList.add('active');
             document.body.style.overflow = 'hidden';
+            lightboxNextSrc = nextSrc || null;
+            document.getElementById('lightbox-next').style.display = nextSrc ? 'block' : 'none';
+        }
+
+        function goNextLightbox() {
+            if (lightboxNextSrc) openLightbox(lightboxNextSrc);
         }
 
         function openVideoLightbox(videoSrc, caption) {
